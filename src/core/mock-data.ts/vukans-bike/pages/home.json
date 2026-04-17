@@ -1,0 +1,98 @@
+{
+  "slug": "/",
+  "locale": "sl",
+  "template": "default",
+  "seo": {
+    "title": "Vukan's Bike — Kolesa in servis",
+    "description": "Servis in prodaja koles vseh vrst v Sloveniji: mestna, cestna, gravel, električna in gorska. Dolgoletna izkušnja tudi pri MTB in trailu. Kontakt: 070 815 379.",
+    "ogImage": "https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=1200&h=630&fit=crop"
+  },
+  "blocks": [
+    {
+      "id": "hero-1",
+      "type": "hero",
+      "props": {
+        "headline": "Vukan's Bike Shop",
+        "subheadline": "Mestna, cestna, gravel, gorska in e-kolesa — servis in popravila po dogovoru. Prav tako kolesarska šola in predavanja.",
+        "backgroundImage": "https://res.cloudinary.com/dru1crghm/image/upload/q_auto/f_auto/v1775402438/IMG_0035_fsvhgt.jpg",
+        "overlay": 0.5,
+        "cta": {
+          "label": "Kolesa na prodaj",
+          "href": "#kolesa"
+        },
+        "secondaryCta": {
+          "label": "Servis",
+          "href": "/service"
+        }
+      }
+    },
+    {
+      "id": "features-1",
+      "type": "stats-bar",
+      "props": {
+        "stats": [
+          { "value": "5+", "label": "Let izkušenj" },
+          { "value": "200+", "label": "Servisiranih koles" },
+          { "value": "Strokovnjak", "label": "Serviser" },
+          { "value": "Vodene ture", "label": "Z strokovno licenco" }
+        ]
+      }
+    },
+    {
+      "id": "image-text-1",
+      "type": "image-text",
+      "props": {
+        "layout": "image-left",
+        "image": {
+          "src": "https://res.cloudinary.com/dru1crghm/image/upload/q_auto/f_auto/v1775405816/IMG_0053_hiw6cd.jpg",
+          "alt": "Servis koles"
+        },
+        "heading": "Servis in popravila",
+        "body": "Servisiramo vse vrste koles. En strokovnjak, osebni pristop — od hitrih popravil do celovitega servisa. Največ izkušenj imamo pri gorskih kolesih in trailu, enako pa skrbno obravnavamo tudi mestna, cestna in gravel kolesa. Za naročilo pokličite 070 815 379 ali pošljite e-pošto.",
+        "cta": {
+          "label": "Servis",
+          "href": "/service"
+        }
+      }
+    },
+    {
+      "id": "products-1",
+      "type": "product-list",
+      "props": {
+        "heading": "Kolesa na prodaj",
+        "subheading": "Preglejte našo ponudbo",
+        "limit": 3,
+        "layout": "grid"
+      },
+      "dataContract": "products"
+    },
+    {
+      "id": "cta-1",
+      "type": "cta-banner",
+      "props": {
+        "heading": "Pripravljeni na vožnjo?",
+        "subheading": "Obiščite nas za brezplačno testno vožnjo. Po dogovoru.",
+        "cta": {
+          "label": "Kontakt",
+          "href": "/contact"
+        },
+        "background": "primary"
+      }
+    }
+  ],
+    "navigation": {
+    "header": [
+      { "label": "Domov", "href": "/" },
+      { "label": "Partnerji", "href": "/brands" },
+      { "label": "Servis", "href": "/service" },
+      { "label": "O nas", "href": "/about" },
+      { "label": "Kontakt", "href": "/contact" }
+    ],
+    "footer": [
+      { "label": "Partnerji", "href": "/brands" },
+      { "label": "Servis", "href": "/service" },
+      { "label": "O nas", "href": "/about" },
+      { "label": "Kontakt", "href": "/contact" }
+    ]
+  }
+}

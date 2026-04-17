@@ -1,0 +1,16 @@
+{
+  "header": [
+    { "label": "Home", "href": "/" },
+    { "label": "Rooms", "href": "/rooms" },
+    { "label": "Dining", "href": "/dining" },
+    { "label": "Spa", "href": "/spa" },
+    { "label": "Activities", "href": "/activities" },
+    { "label": "Contact", "href": "/contact" }
+  ],
+  "footer": [
+    { "label": "About", "href": "/about" },
+    { "label": "Careers", "href": "/careers" },
+    { "label": "Privacy Policy", "href": "/privacy" },
+    { "label": "Terms of Service", "href": "/terms" }
+  ]
+}

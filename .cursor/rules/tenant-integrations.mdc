@@ -1,0 +1,53 @@
+---
+description: Rules for third-party API integrations within tenants. Covers client structure, error handling, and type normalization.
+globs: src/tenants/*/integrations/**
+alwaysApply: false
+---
+
+# Integration Rules
+
+## Folder Structure
+
+Each integration lives in `src/tenants/{tenant}/integrations/{name}/` with:
+- `client.ts` — API client functions (fetch calls, auth, error handling)
+- `types.ts` — Raw API types AND normalized types exposed to components
+
+## Type Normalization
+
+Always define TWO layers of types:
+1. Raw API response types (prefixed with integration name, e.g. `GrmovsekHotelDetail`)
+2. Normalized types for components (`Hotel`, `Room`) — clean, frontend-friendly
+
+Normalize in the client, not in components.
+
+## Error Handling
+
+API clients must NEVER throw to callers. Return `null` on failure and log the error:
+
+```typescript
+export async function getHotel(): Promise<Hotel | null> {
+  try {
+    const res = await fetch(url, { headers });
+    if (!res.ok) throw new Error(`API error: ${res.status}`);
+    const json = await res.json();
+    return normalise(json.data);
+  } catch (error) {
+    console.error("getHotel failed", error);
+    return null;
+  }
+}
+```
+
+## Caching
+
+Use Next.js fetch `next` option for caching:
+- Static data (hotel info): `{ next: { revalidate: 3600 } }` (1 hour)
+- Dynamic data (availability): `{ next: { revalidate: 60 } }` (1 minute)
+
+## Environment Variables
+
+API keys and URLs come from `src/env.ts` (Zod-validated). Add new env vars to the Zod schema in `env.ts` and to `.env.local`.
+
+## Dynamic Imports
+
+Use relative paths in dynamic `import()` statements, NOT path aliases (`@tenants/...`). Next.js does not resolve aliases in dynamic imports.

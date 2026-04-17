@@ -1,0 +1,20 @@
+{
+  "header": [
+    { "label": "Domov", "href": "/" },
+    { "label": "Servis", "href": "/service" },
+    { "label": "Vodene ture", "href": "/vodene-ture" },
+    { "label": "Kolesarska šola", "href": "/kolesarska-sola" },
+    { "label": "O nas", "href": "/about" },
+    { "label": "Partnerji", "href": "/brands" },
+    { "label": "Kontakt", "href": "/contact" }
+  ],
+  "footer": [
+    { "label": "Domov", "href": "/" },
+    { "label": "Servis", "href": "/service" },
+    { "label": "Vodene ture", "href": "/vodene-ture" },
+    { "label": "Kolesarska šola", "href": "/kolesarska-sola" },
+    { "label": "O nas", "href": "/about" },
+    { "label": "Partnerji", "href": "/brands" },
+    { "label": "Kontakt", "href": "/contact" }
+  ]
+}

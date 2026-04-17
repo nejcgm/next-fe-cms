@@ -1,0 +1,46 @@
+---
+description: Core architecture rules for the multi-tenant headless CMS. Enforces folder boundaries, dependency direction, and multi-tenancy patterns.
+alwaysApply: true
+---
+
+# Multi-Tenant CMS Architecture
+
+## Dependency Direction (STRICT)
+
+- `app/` → `core/` → `shared/` (allowed)
+- `app/` → `tenants/` → `shared/` (allowed)
+- `core/` → `tenants/` (FORBIDDEN — except the exceptions below)
+- `shared/` → `core/` (FORBIDDEN — except shared block registration)
+- `shared/` → `tenants/` (FORBIDDEN)
+
+### Allowed Exceptions
+
+These cross-boundary imports exist by architectural necessity:
+
+- `core/init.ts` imports tenant block files to trigger side-effect registration
+- `core/routing/resolver.tsx` imports `tenantRegistry` and dynamically imports tenant templates
+- `core/data/fetcher.ts` imports `getTenantConfig` from the tenant registry
+- `core/data/adapters/mock.adapter.ts` imports from `@mock-data` (resolves to `src/core/mock-data.ts/{tenant}/`)
+- `shared/components/blocks/index.ts` imports `registerSharedBlocks` from `core/blocks/registry`
+- `shared/components/layout/header.tsx` and `footer.tsx` import `NavItem` type from `core/types`
+
+Do NOT add new cross-boundary imports. If you need one, refactor the shared type or function into the correct layer first.
+
+## Folder Responsibilities
+
+- `src/app/` — Routing only. Thin shells that delegate to `core/`. No business logic.
+- `src/core/` — CMS engine. Tenant-agnostic. Defines interfaces tenants implement.
+- `src/tenants/` — Per-tenant isolated code: blocks, integrations, services.
+- `src/shared/` — Reusable UI components and utilities. Both `core/` and `tenants/` may import from here.
+
+## Single Page Route
+
+There is only ONE page route: `src/app/[domain]/[[...slug]]/page.tsx`. NEVER create additional page routes. All pages are rendered through this catch-all using the block system. Dynamic pages like `/rooms/123` use slug pattern matching in the mock adapter, NOT new route files.
+
+## Tenant Isolation
+
+Each tenant lives in `src/tenants/{tenant-id}/` with its own `blocks/`, `integrations/`, `services/`, and `config.ts`. Mock data lives in `src/core/mock-data.ts/{tenant}/` (resort, vukans-bike). Tenants must never import from other tenants.
+
+## Tenant Resolution
+
+Build-time: `TENANT_ID` selects which tenant is built. Runtime: middleware rewrites path with tenant id. Layout imports from `@tenant/config`.

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "prod-3",
+    "name": "Merida Road Ride 903-27",
+    "slug": "merida",
+    "description": "Klasično cestno kolo Merida Road Ride 903-27: aluminijast okvir Road Lite Ride, vilica aluminij / karbon, 27 prestav (3×9) z Shimano Tiagra. Za dolge etape na asfaltu, trening in rekreativno cestno vožnjo.",
+    "shortDescription": "Cestno kolo, Shimano Tiagra 3×9, 27 prestav",
+    "price": 350,
+    "image": "https://res.cloudinary.com/dru1crghm/image/upload/f_jpg,q_auto/v1775402581/IMG_4484_p1jqkq.heic",
+    "category": "Cestna kolesa",
+    "inStock": true,
+    "tags": ["cestno", "merida", "shimano tiagra", "27 prestav", "road ride"]
+  }
+]

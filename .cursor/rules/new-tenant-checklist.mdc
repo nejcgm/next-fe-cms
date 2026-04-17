@@ -1,0 +1,38 @@
+---
+description: Checklist for adding a new tenant to the multi-tenant CMS.
+globs: src/tenants/*/config.ts
+alwaysApply: false
+---
+
+# Adding a New Tenant
+
+## Required Steps
+
+1. Create `src/tenants/{tenant-id}/config.ts` with `TenantConfig` (id, name, domains, theme, adapter)
+2. Create `src/tenants/{tenant-id}/blocks/index.ts` — register blocks via `registerTenantBlocks("{tenant-id}", { ... })`
+3. Create `src/core/mock-data.ts/{folder}/pages/home.json` — folder = tenant id, or "resort" for resort-example
+4. Create `src/core/mock-data.ts/{folder}/navigation.json` — header/footer nav
+5. Add tenant import to `src/core/init.ts` so blocks are registered at startup
+6. Add npm scripts: `dev:{short}`, `build:{short}`, `build:{short}:analyze` in package.json
+
+## Tenant Config Shape
+
+```typescript
+export const config: TenantConfig = {
+  id: "my-tenant",
+  name: "My Site",
+  domains: ["my-site.localhost", "my-site.com"],
+  defaultLocale: "en",
+  adapter: "mock",
+  theme: {
+    "color-primary": "#...",
+    "color-background": "#...",
+    "color-foreground": "#...",
+    // ...
+  },
+};
+```
+
+## Testing
+
+Run with: `npm run dev:resort` or `npm run dev:bike` (or add `dev:{short}` for new tenant)

@@ -1,0 +1,46 @@
+{
+  "slug": "/rooms",
+  "locale": "en",
+  "template": "default",
+  "seo": {
+    "title": "Our Rooms — Kope",
+    "description": "Choose from 5 rooms and suites at Kope. From cozy doubles to panoramic alpine suites.",
+    "ogImage": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&h=630&fit=crop"
+  },
+  "blocks": [
+    {
+      "id": "section-header-1",
+      "type": "section-header",
+      "props": {
+        "heading": "Our Rooms & Suites",
+        "subheading": "47 unique spaces, each designed for your perfect alpine retreat",
+        "centered": true
+      }
+    },
+    {
+      "id": "rooms-all",
+      "type": "room-list",
+      "props": {
+        "limit": 12,
+        "layout": "grid"
+      },
+      "dataContract": "rooms"
+    }
+  ],
+  "navigation": {
+    "header": [
+      { "label": "Home", "href": "/" },
+      { "label": "Rooms", "href": "/rooms" },
+      { "label": "Dining", "href": "/dining" },
+      { "label": "Spa", "href": "/spa" },
+      { "label": "Activities", "href": "/activities" },
+      { "label": "Contact", "href": "/contact" }
+    ],
+    "footer": [
+      { "label": "About", "href": "/about" },
+      { "label": "Careers", "href": "/careers" },
+      { "label": "Privacy Policy", "href": "/privacy" },
+      { "label": "Terms of Service", "href": "/terms" }
+    ]
+  }
+}

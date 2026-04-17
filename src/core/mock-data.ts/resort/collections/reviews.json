@@ -1,0 +1,42 @@
+[
+  {
+    "id": "rev-1",
+    "author": "Sarah M.",
+    "rating": 5,
+    "content": "Absolutely magical stay! The Alpine Suite exceeded all expectations. Waking up to those mountain views was unforgettable. The staff was incredibly attentive and the breakfast was delicious.",
+    "date": "March 2026",
+    "verified": true
+  },
+  {
+    "id": "rev-2",
+    "author": "Thomas K.",
+    "rating": 5,
+    "content": "Perfect family getaway. The chalet had everything we needed and the kids loved exploring the nearby trails. Already planning our next visit!",
+    "date": "February 2026",
+    "verified": true
+  },
+  {
+    "id": "rev-3",
+    "author": "Elena R.",
+    "rating": 4,
+    "content": "Beautiful location and great spa facilities. Room was comfortable and clean. Would have loved a later checkout option but otherwise wonderful experience.",
+    "date": "January 2026",
+    "verified": true
+  },
+  {
+    "id": "rev-4",
+    "author": "Michael B.",
+    "rating": 5,
+    "content": "Second time staying here and it just keeps getting better. The winter package with ski passes included was excellent value.",
+    "date": "December 2025",
+    "verified": true
+  },
+  {
+    "id": "rev-5",
+    "author": "Anna L.",
+    "rating": 5,
+    "content": "Hidden gem! The restaurant alone is worth the trip. We had the tasting menu and every course was a masterpiece. Can't wait to return.",
+    "date": "November 2025",
+    "verified": true
+  }
+]

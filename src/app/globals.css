@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Default theme tokens - will be overridden by tenant theme */
+    --color-primary: #1B4D3E;
+    --color-secondary: #8B7355;
+    --color-accent: #D4A574;
+    --color-background: #FAFAF8;
+    --color-foreground: #1A1A1A;
+    --color-muted: #F3F0EB;
+    --color-border: #E5E0D8;
+    --color-muted-foreground: #6B7280;
+
+    --font-heading: system-ui, sans-serif;
+    --font-body: system-ui, sans-serif;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Animation utilities */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+/* Skeleton loading */
+.skeleton {
+  @apply animate-pulse bg-muted rounded;
+}

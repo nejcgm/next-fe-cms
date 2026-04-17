@@ -1,0 +1,18 @@
+{
+  "slug": "/rooms/:roomId",
+  "slugPattern": "/rooms/:roomId",
+  "locale": "en",
+  "template": "default",
+  "seo": {
+    "title": "Room Details — Grmovsek Hotel",
+    "description": "View room details and check availability for your perfect mountain retreat.",
+    "ogImage": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&h=630&fit=crop"
+  },
+  "blocks": [
+    {
+      "id": "room-detail-1",
+      "type": "room-detail",
+      "props": {}
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+---
+description: TypeScript and code style conventions for the project.
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# TypeScript Conventions
+
+## Strict Mode
+
+TypeScript strict mode is enabled. Never use `any` unless absolutely necessary. Prefer `unknown` and narrow with type guards.
+
+## Path Aliases (Static Imports Only)
+
+Use path aliases for static imports:
+- `@/` → `src/`
+- `@core/` → `src/core/`
+- `@shared/` → `src/shared/`
+- `@tenant` → `src/tenants/{TENANT_ID}` (build-time, from prepare-tenant.js)
+- `@mock-data` → `src/core/mock-data.ts/{tenant}` (vukans-bike or resort)
+
+For dynamic `import()` statements, use RELATIVE PATHS only. Next.js cannot resolve aliases in dynamic imports.
+
+## Component Patterns
+
+- Server Components by default (no directive needed)
+- Add `"use client"` only when using hooks, event handlers, or browser APIs
+- Keep client components small and leaf-level
+
+## Interface vs Type
+
+- `interface` for component props and object shapes
+- `type` for unions, intersections, and utility types
+- Service return types that need `Record<string, unknown>` compatibility: use `extends Record<string, unknown>`
+
+## Environment Variables
+
+All env vars must be added to the Zod schema in `src/env.ts`. Access via `import { env } from "@/env"`, never `process.env` directly.
+
+### Allowed Exceptions
+
+- `process.env.NODE_ENV` — Standard Node.js convention, safe to use directly in any file
+- `process.env.TENANT_OVERRIDE` — Used in `middleware.ts` which runs at the Edge before Zod validation is available
+
+## Error Boundaries
+
+- `error.tsx` must be a client component (`"use client"`)
+- `loading.tsx` and `not-found.tsx` can be server components

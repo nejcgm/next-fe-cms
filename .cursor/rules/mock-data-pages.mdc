@@ -1,0 +1,60 @@
+---
+description: Rules for creating mock page JSON files that define page composition from blocks.
+globs: src/core/mock-data.ts/*/pages/*.json
+alwaysApply: false
+---
+
+# Mock Page Data Rules
+
+## Page JSON Structure
+
+Every page JSON must have this shape:
+
+```json
+{
+  "slug": "/about",
+  "locale": "en",
+  "template": "default",
+  "seo": {
+    "title": "Page Title",
+    "description": "Meta description",
+    "ogImage": "https://..."
+  },
+  "blocks": [
+    {
+      "id": "unique-block-id",
+      "type": "block-type-name",
+      "props": { }
+    }
+  ]
+}
+```
+
+## Block IDs
+
+Every block `id` must be unique within the page. Use format `{type}-{number}` (e.g. `hero-1`, `room-list-1`).
+
+## Dynamic Route Pages
+
+For pages that match dynamic slugs (e.g. `/rooms/:roomId`), add a `slugPattern` field:
+
+```json
+{
+  "slugPattern": "/rooms/:roomId",
+  "slug": "/rooms/:roomId",
+  "blocks": [...]
+}
+```
+
+The mock adapter uses pattern matching to resolve these. Pattern pages are registered in `mock.adapter.ts` `patternFiles` array.
+
+## File Naming
+
+- Static pages: `{slug}.json` (e.g. `about.json`, `contact.json`)
+- Home page: `home.json` (slug `/`)
+- Nested slugs use `--` separator: `/rooms/all` → `rooms--all.json`
+- Pattern pages: descriptive name (e.g. `room-detail.json`)
+
+## Block `type` Must Match Registry
+
+The `type` field must exactly match a key registered in `blocks/index.ts` via `registerTenantBlocks()`.
