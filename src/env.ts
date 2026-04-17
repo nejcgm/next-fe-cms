@@ -1,13 +1,18 @@
 import { z } from "zod";
 
+const optionalUrl = z.preprocess(
+  (value) => (value === "" ? undefined : value),
+  z.string().url().optional()
+);
+
 const envSchema = z.object({
   NODE_ENV: z.enum(["development", "production", "test"]),
-  STRAPI_URL: z.string().url().optional(),
+  STRAPI_URL: optionalUrl,
   STRAPI_API_TOKEN: z.string().optional(),
   REVALIDATE_SECRET: z.string().min(16).default("change-me-in-production-16-chars"),
-  RESORT_BOOKING_API_URL: z.string().url().optional(),
+  RESORT_BOOKING_API_URL: optionalUrl,
   RESORT_BOOKING_API_KEY: z.string().optional(),
-  LITEAPI_URL: z.string().url().optional(),
+  LITEAPI_URL: optionalUrl,
   LITEAPI_KEY: z.string().optional(),
   LITEAPI_HOTEL_ID: z.string().optional(),
 });
