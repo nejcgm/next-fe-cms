@@ -1,5 +1,7 @@
 # Dependencies
 node_modules/
+.pnpm-store
+.pnpm-store/
 .pnp
 .pnp.js
 
@@ -25,7 +27,8 @@ yarn-error.log*
 
 # IDE
 .idea/
-.vscode/
+.vscode/*
+!.vscode/settings.json
 *.swp
 *.swo
 
