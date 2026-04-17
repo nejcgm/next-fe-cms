@@ -2,17 +2,25 @@ import { NextRequest, NextResponse } from "next/server";
 import tenantConfig from "@tenant/config";
 
 export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  const tenantPrefix = `/${tenantConfig.id}`;
+
+  // Already under /[tenantId]/... — do not rewrite again.
+  if (pathname === tenantPrefix || pathname.startsWith(`${tenantPrefix}/`)) {
+    return NextResponse.next();
+  }
+
   const url = request.nextUrl.clone();
-
-  // Rewrite every request to the tenant's [domain] route segment
-  // e.g. /about → /vukans-bike/about
-  url.pathname = `/${tenantConfig.id}${url.pathname}`;
-
+  // e.g. / → /vukans-bike/, /about → /vukans-bike/about
+  url.pathname = `${tenantPrefix}${pathname}`;
   return NextResponse.rewrite(url);
 }
 
 export const config = {
   matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    // Explicit "/" — the broad pattern below often does not match "/" alone.
+    "/",
+    // Simpler than nested extension regex (avoids path-to-regexp edge cases on Vercel).
+    "/((?!api|_next|favicon\\.ico).*)",
   ],
 };
