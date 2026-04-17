@@ -10,6 +10,7 @@
     "build:resort:analyze": "BUILD_CLEAN_ANALYZE=1 TENANT_ID=resort-example node scripts/prepare-tenant.js && TENANT_ID=resort-example ANALYZE=true next build",
     "build:bike:analyze": "BUILD_CLEAN_ANALYZE=1 TENANT_ID=vukans-bike node scripts/prepare-tenant.js && TENANT_ID=vukans-bike ANALYZE=true next build",
     "verify:build": "node scripts/verify-build.js",
+    "vercel-build": "node scripts/prepare-tenant.js && next build",
     "start": "next start",
     "start:resort": "next start -p 3001",
     "start:bike": "next start -p 3002",

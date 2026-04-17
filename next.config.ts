@@ -10,8 +10,13 @@ if (!tenantId) {
   );
 }
 
+// `vercel build` post-process expects the default `.next` output directory.
+// Local / CI tenant builds use `.next-${tenantId}` to avoid collisions.
+const distDir =
+  process.env.NEXT_USE_VERCEL_DIST === "1" ? ".next" : `.next-${tenantId}`;
+
 const nextConfig: NextConfig = {
-  distDir: `.next-${tenantId}`,
+  distDir,
   // Temporary: lint is enforced separately in CI; do not block tenant builds on legacy lint debt.
   eslint: {
     ignoreDuringBuilds: true,
