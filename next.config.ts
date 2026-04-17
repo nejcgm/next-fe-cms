@@ -10,30 +10,8 @@ if (!tenantId) {
   );
 }
 
-/** Safe to embed in a path-to-regexp `source` negative-lookahead (tenant ids are slug-like). */
-function tenantPathRegexSegment(id: string): string {
-  return id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
 const nextConfig: NextConfig = {
   distDir: `.next-${tenantId}`,
-  // Same mapping as middleware, but applied in Next's rewrite phase — more reliable on Vercel
-  // if Edge middleware is skipped or mis-ordered for some requests.
-  async rewrites() {
-    const t = tenantId;
-    const tr = tenantPathRegexSegment(t);
-    return {
-      beforeFiles: [
-        { source: "/", destination: `/${t}/` },
-        {
-          source: `/:path((?!${tr}/|${tr}$|api/|api$|_next/|favicon\\.ico).*)`,
-          destination: `/${t}/:path`,
-        },
-      ],
-      afterFiles: [],
-      fallback: [],
-    };
-  },
   // Temporary: lint is enforced separately in CI; do not block tenant builds on legacy lint debt.
   eslint: {
     ignoreDuringBuilds: true,
