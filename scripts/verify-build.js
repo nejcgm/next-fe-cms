@@ -9,13 +9,27 @@ const fs = require('fs');
 const path = require('path');
 
 let tenantId = process.env.TENANT_ID;
+const repoRoot = path.join(__dirname, '..');
+
+function resolveBuildDir(currentTenantId) {
+  if (currentTenantId) {
+    const tenantBuildDir = path.join(repoRoot, `.next-${currentTenantId}`);
+    if (fs.existsSync(tenantBuildDir)) return tenantBuildDir;
+  }
+  return path.join(repoRoot, '.next');
+}
 
 // Auto-detect tenant from build artifacts if not set
 if (!tenantId) {
-  const buildDir = path.join(__dirname, '..', '.next');
+  const candidateBuildDirs = [
+    path.join(repoRoot, '.next-vukans-bike'),
+    path.join(repoRoot, '.next-resort-example'),
+    path.join(repoRoot, '.next'),
+  ];
+  const buildDir = candidateBuildDirs.find((dir) => fs.existsSync(dir)) || path.join(repoRoot, '.next');
   // Check middleware (contains tenant config id) or analyze files
   const middlewarePath = path.join(buildDir, 'server', 'src', 'middleware.js');
-  const analyzeDir = path.join(__dirname, '..', 'analyze');
+  const analyzeDir = path.join(repoRoot, 'analyze');
   const serverAnalyzeDir = path.join(buildDir, 'server', 'analyze');
 
   if (fs.existsSync(middlewarePath)) {
@@ -49,7 +63,7 @@ console.log(`\n🔍 Verifying build for tenant: ${tenantId}\n`);
 console.log('='.repeat(60));
 
 const otherTenants = ['vukans-bike', 'resort-example'].filter(t => t !== tenantId);
-const buildDir = path.join(__dirname, '..', '.next');
+const buildDir = resolveBuildDir(tenantId);
 
 let issues = [];
 let warnings = 0;
@@ -64,7 +78,7 @@ if (!fs.existsSync(buildDir)) {
 
 // 1. Check webpack stats if available
 console.log('\n1️⃣  Checking webpack bundle stats...');
-const analyzeDir = path.join(__dirname, '..', 'analyze');
+const analyzeDir = path.join(repoRoot, 'analyze');
 const serverAnalyzeDir = path.join(buildDir, 'server', 'analyze');
 const hasClientStats = fs.existsSync(analyzeDir) &&
   fs.readdirSync(analyzeDir).some(f => f.endsWith('.json') && f.includes(tenantId));
