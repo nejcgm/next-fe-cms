@@ -1,0 +1,14 @@
+[
+  {
+    "id": "prod-3",
+    "name": "Merida Road Ride 903-27",
+    "slug": "merida",
+    "description": "Classic road bike Merida Road Ride 903-27: Road Lite Ride aluminium frame, aluminium / carbon fork, 27 speeds (3×9) with Shimano Tiagra. For long miles on tarmac, training, and recreational riding.",
+    "shortDescription": "Road bike, Shimano Tiagra 3×9, 27 speeds",
+    "price": 350,
+    "image": "https://res.cloudinary.com/dru1crghm/image/upload/f_jpg,q_auto/v1775402581/IMG_4484_p1jqkq.heic",
+    "category": "Road bikes",
+    "inStock": true,
+    "tags": ["road", "merida", "shimano tiagra", "27 speed", "road ride"]
+  }
+]

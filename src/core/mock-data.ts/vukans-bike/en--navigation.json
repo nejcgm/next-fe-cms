@@ -1,0 +1,29 @@
+{
+  "header": [
+    { "label": "Home", "href": "/en" },
+    { "label": "Service", "href": "/en/service" },
+    { "label": "Shop", "href": "/en/shop" },
+    { "label": "Guided tours", "href": "/en/guided-tours" },
+    { "label": "Bike school", "href": "/en/bike-school" },
+    { "label": "About", "href": "/en/about" },
+    { "label": "Partners", "href": "/en/brands" },
+    { "label": "Contact", "href": "/en/contact" }
+  ],
+  "footer": [
+    { "label": "Home", "href": "/en" },
+    { "label": "Service", "href": "/en/service" },
+    { "label": "Shop", "href": "/en/shop" },
+    { "label": "Guided tours", "href": "/en/guided-tours" },
+    { "label": "Bike school", "href": "/en/bike-school" },
+    { "label": "About", "href": "/en/about" },
+    { "label": "Partners", "href": "/en/brands" },
+    { "label": "Contact", "href": "/en/contact" }
+  ],
+  "footerCopy": {
+    "tagline": "Mountain bike sales and service in Apače.",
+    "linksHeading": "Links",
+    "contactHeading": "Contact",
+    "contactPlaceholder": "Get in touch if you have any questions.",
+    "copyrightReserved": "All rights reserved."
+  }
+}
