@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { AboutStoryProps } from "./types";
 
 export function AboutStory({
@@ -32,12 +33,8 @@ export function AboutStory({
   );
 
   const imageBlock = image ? (
-    <div className="relative aspect-[4/3] rounded-[var(--radius)] overflow-hidden bg-[var(--color-muted)]">
-      <img
-        src={image}
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover"
-      />
+    <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius)] bg-[var(--color-muted)]">
+      <Image src={image} alt="" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
     </div>
   ) : null;
 

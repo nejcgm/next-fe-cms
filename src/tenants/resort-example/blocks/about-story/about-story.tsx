@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface AboutStoryProps {
   title?: string;
   subtitle?: string;
@@ -75,11 +77,13 @@ export function AboutStory({
           {/* Image */}
           {image && (
             <div className={imagePosition === "left" ? "lg:col-start-1" : ""}>
-              <div className="aspect-[4/3] rounded-[var(--radius)] overflow-hidden">
-                <img
+              <div className="group relative aspect-[4/3] overflow-hidden rounded-[var(--radius)]">
+                <Image
                   src={image}
                   alt={title}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
             </div>

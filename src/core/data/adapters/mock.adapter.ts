@@ -1,12 +1,21 @@
-import type { CmsAdapter, CollectionParams } from "../contracts";
+import type { CmsAdapter, CollectionParams, SitemapEntry } from "../contracts";
 import type { PageData, NavigationData } from "@core/types/page";
 import { logger } from "@shared/lib/logger";
 
 // Static import - both tenants have navigation.json
-// @ts-ignore - resolved at build time by webpack alias
 import nav from "@mock-data/navigation.json";
+import sitemapFile from "@mock-data/sitemap.json";
 
 const navigation = nav as NavigationData;
+
+interface SitemapJsonEntry {
+  pathname: string;
+  lastModified?: string;
+}
+
+interface SitemapJson {
+  entries: SitemapJsonEntry[];
+}
 
 function patternToRegex(pattern: string): RegExp {
   const escaped = pattern
@@ -104,7 +113,20 @@ export class MockAdapter implements CmsAdapter {
     return items.find((item) => item.id === id) ?? null;
   }
 
-  async getNavigation(_tenant: string, _locale: string): Promise<NavigationData | null> {
+  async getNavigation(tenant: string, locale: string): Promise<NavigationData | null> {
+    void tenant;
+    void locale;
     return navigation;
+  }
+
+  async listSitemapEntries(tenant: string, locale: string): Promise<SitemapEntry[]> {
+    void tenant;
+    void locale;
+    const raw = sitemapFile as SitemapJson;
+    const entries = raw.entries ?? [];
+    return entries.map((e) => ({
+      pathname: e.pathname.startsWith("/") ? e.pathname : `/${e.pathname}`,
+      lastModified: e.lastModified ? new Date(e.lastModified) : undefined,
+    }));
   }
 }

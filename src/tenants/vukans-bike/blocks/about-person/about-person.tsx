@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { AboutPersonProps } from "./types";
 import { isExternalHref } from "@shared/utils/url";
 
@@ -8,12 +9,8 @@ export function AboutPerson({ image, name, role, bio, cta }: AboutPersonProps) {
       <div className="max-w-3xl mx-auto">
         <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center md:items-start">
           {image && (
-            <div className="flex-shrink-0 w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-[var(--color-primary)]/20 bg-[var(--color-muted)]">
-              <img
-                src={image}
-                alt={name}
-                className="w-full h-full object-cover"
-              />
+            <div className="relative h-48 w-48 flex-shrink-0 overflow-hidden rounded-full border-4 border-[var(--color-primary)]/20 bg-[var(--color-muted)] md:h-56 md:w-56">
+              <Image src={image} alt={name} fill className="object-cover" sizes="224px" />
             </div>
           )}
           <div className="text-center md:text-left">

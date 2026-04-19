@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ImageLightbox } from "@shared/components/ui/image-lightbox";
@@ -150,10 +151,13 @@ export function RoomDetail({
                   className="relative aspect-[16/10] lg:aspect-[16/9] rounded-[var(--radius)] overflow-hidden cursor-pointer group bg-[var(--color-muted)]"
                   onClick={() => setLightboxOpen(true)}
                 >
-                  <img
+                  <Image
                     src={allPhotos[selectedImageIndex]}
                     alt={room.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 1024px) 100vw, 75vw"
+                    priority
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
@@ -184,10 +188,12 @@ export function RoomDetail({
                           : "opacity-70 hover:opacity-100"
                       }`}
                     >
-                      <img
+                      <Image
                         src={photo}
                         alt={`${room.name} thumbnail ${i + 1}`}
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 80px, 25vw"
                       />
                     </button>
                   ))}

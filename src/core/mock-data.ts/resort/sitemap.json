@@ -1,0 +1,14 @@
+{
+  "entries": [
+    { "pathname": "/", "lastModified": "2026-04-19T00:00:00.000Z" },
+    { "pathname": "/about" },
+    { "pathname": "/rooms" },
+    { "pathname": "/contact" },
+    { "pathname": "/rooms/alpine-suite" },
+    { "pathname": "/rooms/forest-room" },
+    { "pathname": "/rooms/family-chalet" },
+    { "pathname": "/rooms/deluxe-double" },
+    { "pathname": "/rooms/panorama-loft" },
+    { "pathname": "/rooms/cozy-single" }
+  ]
+}

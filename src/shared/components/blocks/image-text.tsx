@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { cn } from "@shared/utils/cn";
 import { isExternalHref } from "@shared/utils/url";
 
@@ -20,11 +21,18 @@ export function ImageText({ layout = "image-left", image, heading, body, cta }: 
     <section className="py-16 px-4 bg-[var(--color-background)]">
       <div className="max-w-6xl mx-auto">
         <div className={cn("grid grid-cols-1 lg:grid-cols-2 gap-12 items-center", isImageLeft ? "" : "lg:grid-flow-dense")}>
-          <div className={cn("overflow-hidden rounded-[var(--radius)]", !isImageLeft && "lg:col-start-2")}>
-            <img
+          <div
+            className={cn(
+              "relative aspect-[4/3] overflow-hidden rounded-[var(--radius)]",
+              !isImageLeft && "lg:col-start-2"
+            )}
+          >
+            <Image
               src={image.src}
               alt={image.alt}
-              className="w-full h-auto object-cover aspect-[4/3]"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
           <div className={cn(isImageLeft ? "" : "lg:col-start-1 lg:row-start-1")}>

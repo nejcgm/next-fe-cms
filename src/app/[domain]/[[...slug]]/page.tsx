@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: PageProps) {
   const page = await adapter.getPage(tenantConfig.id, slugPath, tenantConfig.defaultLocale);
 
   if (!page) return {};
-  return buildMetadata(page.seo, tenantConfig);
+  return buildMetadata(page.seo, tenantConfig, { pathname: slugPath, locale: page.locale });
 }
 
 export default async function TenantPage({ params, searchParams }: PageProps) {
@@ -46,13 +46,21 @@ export default async function TenantPage({ params, searchParams }: PageProps) {
   }));
 
   return (
-    <Template page={page} tenant={tenantConfig}>
-      <BlockRenderer
-        blocks={blocksWithQuery}
-        tenant={tenantConfig.id}
-        locale={page.locale}
-        slug={slugPath}
-      />
-    </Template>
+    <>
+      {page.seo.jsonLd ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(page.seo.jsonLd) }}
+        />
+      ) : null}
+      <Template page={page} tenant={tenantConfig}>
+        <BlockRenderer
+          blocks={blocksWithQuery}
+          tenant={tenantConfig.id}
+          locale={page.locale}
+          slug={slugPath}
+        />
+      </Template>
+    </>
   );
 }

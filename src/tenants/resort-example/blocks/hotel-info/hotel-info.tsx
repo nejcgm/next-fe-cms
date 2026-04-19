@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { ImageLightbox } from "@shared/components/ui/image-lightbox";
 import type { HotelInfoProps } from "./types";
@@ -38,10 +39,13 @@ export function HotelInfo({ hotel }: HotelInfoProps) {
                 className="col-span-2 row-span-2 relative rounded-[var(--radius)] overflow-hidden cursor-pointer group"
                 onClick={() => openLightbox(0)}
               >
-                <img
+                <Image
                   src={displayImages[0]}
                   alt={`${hotel.name} — main photo`}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-opacity">
@@ -56,10 +60,12 @@ export function HotelInfo({ hotel }: HotelInfoProps) {
                   className="relative rounded-[var(--radius)] overflow-hidden cursor-pointer group"
                   onClick={() => openLightbox(i + 1)}
                 >
-                  <img
+                  <Image
                     src={url}
                     alt={`${hotel.name} — photo ${i + 2}`}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 1024px) 25vw, 12vw"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
                 </div>
@@ -71,12 +77,14 @@ export function HotelInfo({ hotel }: HotelInfoProps) {
                   className="relative rounded-[var(--radius)] overflow-hidden cursor-pointer group"
                   onClick={() => openLightbox(4)}
                 >
-                  <img
+                  <Image
                     src={displayImages[4]}
                     alt={`${hotel.name} — photo 5`}
-                    className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${
+                    fill
+                    className={`object-cover transition-transform duration-500 group-hover:scale-105 ${
                       hasMoreImages ? "brightness-75" : ""
                     }`}
+                    sizes="(max-width: 1024px) 25vw, 12vw"
                   />
                   {hasMoreImages && (
                     <div className="absolute inset-0 flex items-center justify-center">

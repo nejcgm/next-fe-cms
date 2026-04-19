@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { PartnersGalleryProps, Partner } from "./types";
 
 function PartnerCard({ partner }: { partner: Partner }) {
@@ -19,13 +20,13 @@ function PartnerCard({ partner }: { partner: Partner }) {
 
         {/* Fixed-size image area — same aspect on every card */}
         <div className="relative aspect-[16/10] w-full min-w-0 shrink-0 overflow-hidden border-b border-neutral-700 bg-neutral-900/80 transition-colors duration-300 group-hover:border-neutral-600">
-          <div className="absolute inset-0 flex items-center justify-center p-4">
-            <img
+          <div className="absolute inset-4">
+            <Image
               src={partner.icon}
               alt={partner.name}
-              className="max-h-full max-w-full object-contain"
-              loading="lazy"
-              decoding="async"
+              fill
+              className="object-contain"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
           </div>
         </div>

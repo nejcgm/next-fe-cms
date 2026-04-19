@@ -7,13 +7,16 @@ const config: TenantConfig = {
   id: "vukans-bike",
   name: "Vukan's Bike",
   logoUrl: VUKANS_BIKE_LOGO,
+  canonicalOrigin: "https://vukansbike.com",
+  defaultMetaDescription:
+    "Servis in prodaja koles vseh vrst v Apačah in Sloveniji: mestna, cestna, gravel, električna in gorska kolesa. Kolesarska šola, vodene ture, MTB.",
   contact: {
     addressLine: "Apače 66a, 9253 Apače, Slovenija",
     phone: "070 815 379",
     email: "vukansbike@gmail.com",
   },
   domains: ["bikes.localhost", "vukansbikes.com", "www.vukansbikes.com"],
-  defaultLocale: "en",
+  defaultLocale: "sl",
   locales: ["en", "sl"],
   features: {
     blog: false,

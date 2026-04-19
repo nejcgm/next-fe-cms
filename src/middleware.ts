@@ -21,6 +21,6 @@ export const config = {
     // Explicit "/" — the broad pattern below often does not match "/" alone.
     "/",
     // Simpler than nested extension regex (avoids path-to-regexp edge cases on Vercel).
-    "/((?!api|_next|favicon\\.ico).*)",
+    "/((?!api|_next|favicon\\.ico|robots\\.txt|sitemap).*)",
   ],
 };

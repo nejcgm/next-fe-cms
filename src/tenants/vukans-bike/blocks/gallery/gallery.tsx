@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState } from "react";
 import { ImageLightbox } from "@shared/components/ui/image-lightbox";
 import type { GalleryProps } from "./types";
@@ -50,12 +51,12 @@ export function Gallery({ heading, subheading, images }: GalleryProps) {
                 setLightboxOpen(true);
               }}
             >
-              <img
+              <Image
                 src={image.src}
                 alt={image.alt ?? "Galerija"}
-                loading="lazy"
-                decoding="async"
-                className="absolute inset-0 h-full w-full object-cover"
+                fill
+                sizes="(max-width: 768px) 50vw, 25vw"
+                className="object-cover"
               />
             </div>
           ))}

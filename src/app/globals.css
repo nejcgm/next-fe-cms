@@ -50,3 +50,25 @@
 .skeleton {
   @apply animate-pulse bg-muted rounded;
 }
+
+/* Route loading: indeterminate bar (see PageLoadingIndicator) */
+@keyframes navigation-load {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(450%);
+  }
+}
+
+.navigation-load-bar {
+  animation: navigation-load 1.1s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navigation-load-bar {
+    animation: none;
+    transform: translateX(27.5%);
+    opacity: 0.9;
+  }
+}

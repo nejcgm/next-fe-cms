@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ProductListProps } from "./types";
 import { formatCurrency } from "@shared/utils/format";
 
@@ -28,11 +29,13 @@ export function ProductList({ heading, subheading, layout = "grid", products }: 
               href={`/bikes/${product.slug}`}
               className="group block rounded-[var(--radius)] overflow-hidden border border-[var(--color-border)] hover:shadow-lg transition-shadow bg-[var(--color-muted)]"
             >
-              <div className="aspect-square overflow-hidden bg-[var(--color-muted)]">
-                <img
+              <div className="relative aspect-square overflow-hidden bg-[var(--color-muted)]">
+                <Image
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
               </div>
               <div className="p-4">

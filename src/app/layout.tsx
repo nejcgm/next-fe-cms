@@ -3,10 +3,18 @@ import "./globals.css";
 
 // Initialize core systems (registers blocks, etc.)
 import "@core/init";
+import tenantConfig from "@tenant/config";
+import { getSiteOrigin } from "@core/seo/site-url";
 
 export const metadata: Metadata = {
-  title: "Multi-Tenant CMS",
-  description: "A fully dynamic, multi-tenant CMS frontend",
+  metadataBase: new URL(getSiteOrigin(tenantConfig)),
+  title: {
+    default: tenantConfig.name,
+    template: `%s | ${tenantConfig.name}`,
+  },
+  description:
+    tenantConfig.defaultMetaDescription ??
+    `${tenantConfig.name} — multi-tenant CMS site`,
 };
 
 export default function RootLayout({
@@ -15,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={tenantConfig.defaultLocale} suppressHydrationWarning>
       <body className="antialiased" suppressHydrationWarning>{children}</body>
     </html>
   );

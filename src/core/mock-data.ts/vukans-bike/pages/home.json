@@ -5,7 +5,33 @@
   "seo": {
     "title": "Vukan's Bike — Kolesa in servis",
     "description": "Servis in prodaja koles vseh vrst v Sloveniji: mestna, cestna, gravel, električna in gorska. Dolgoletna izkušnja tudi pri MTB in trailu. Kontakt: 070 815 379.",
-    "ogImage": "https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=1200&h=630&fit=crop"
+    "ogImage": "https://res.cloudinary.com/dru1crghm/image/upload/q_auto/f_auto/v1775405173/1000004333_bged3h.jpg",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "BicycleStore",
+      "name": "Vukan's Bike",
+      "description": "Servis in prodaja koles vseh vrst v Apačah: mestna, cestna, gravel, električna in gorska kolesa, kolesarska šola in vodene ture.",
+      "url": "https://vukansbike.com/",
+      "image": "https://res.cloudinary.com/dru1crghm/image/upload/q_auto/f_auto/v1775405173/1000004333_bged3h.jpg",
+      "telephone": "+38670815379",
+      "email": "vukansbike@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Apače 66a",
+        "postalCode": "9253",
+        "addressLocality": "Apače",
+        "addressCountry": "SI"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 46.6961521,
+        "longitude": 15.9091873
+      },
+      "sameAs": [
+        "https://www.google.com/maps/place/Vukans+bike/@46.6961521,15.9091873,17z/data=!3m1!4b1!4m6!3m5!1s0x476f1311eca9b685:0x1751e62b3f51766c!8m2!3d46.6961521!4d15.9091873!16s%2Fg%2F11xdx3n8xg"
+      ],
+      "priceRange": "$$"
+    }
   },
   "blocks": [
     {

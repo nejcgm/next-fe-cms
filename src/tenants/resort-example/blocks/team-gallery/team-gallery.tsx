@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface TeamMember {
   name: string;
   role: string;
@@ -34,11 +36,13 @@ export function TeamGallery({
           {members.map((member, i) => (
             <div key={`${member.name}-${i}`} className="text-center">
               {member.image ? (
-                <div className="aspect-square rounded-[var(--radius)] overflow-hidden mb-4">
-                  <img
+                <div className="group relative mb-4 aspect-square overflow-hidden rounded-[var(--radius)]">
+                  <Image
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   />
                 </div>
               ) : (

@@ -7,9 +7,9 @@ export interface TenantContact {
 export interface TenantConfig {
   id: string;
   name: string;
-  /** Optional logo image URL for header (e.g. brand logo). When set, header shows image instead of name text. */
   logoUrl?: string;
-  /** Optional contact info for footer */
+  canonicalOrigin?: string;
+  defaultMetaDescription?: string;
   contact?: TenantContact;
   domains: string[];
   defaultLocale: string;

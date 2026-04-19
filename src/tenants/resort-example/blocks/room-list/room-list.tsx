@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { RoomListProps } from "./types";
 
 export function RoomList({ heading, subheading, layout = "grid", cta, rooms }: RoomListProps) {
@@ -44,11 +45,13 @@ export function RoomList({ heading, subheading, layout = "grid", cta, rooms }: R
               className="group block rounded-[var(--radius)] overflow-hidden border border-[var(--color-border)] hover:shadow-lg transition-shadow bg-white cursor-pointer"
             >
               {room.mainPhoto && (
-                <div className="aspect-video overflow-hidden">
-                  <img
+                <div className="relative aspect-video overflow-hidden">
+                  <Image
                     src={room.mainPhoto}
                     alt={room.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
               )}

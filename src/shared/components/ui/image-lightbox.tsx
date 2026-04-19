@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect, useCallback } from "react";
 
 interface ImageLightboxProps {
@@ -106,10 +107,14 @@ export function ImageLightbox({
         className="relative w-full h-full flex items-center justify-center p-16"
         onClick={(e) => e.stopPropagation()}
       >
-        <img
+        <Image
           src={images[currentIndex]}
           alt={`${altPrefix} ${currentIndex + 1}`}
-          className="max-w-full max-h-full object-contain"
+          width={1920}
+          height={1080}
+          className="max-h-[85vh] max-w-full w-auto h-auto object-contain"
+          sizes="100vw"
+          priority
         />
       </div>
 
@@ -119,19 +124,16 @@ export function ImageLightbox({
           {images.map((img, idx) => (
             <button
               key={idx}
+              type="button"
               onClick={(e) => {
                 e.stopPropagation();
                 setCurrentIndex(idx);
               }}
-              className={`flex-shrink-0 w-16 h-12 rounded overflow-hidden border-2 transition-all ${
+              className={`relative flex-shrink-0 h-12 w-16 overflow-hidden rounded border-2 transition-all ${
                 idx === currentIndex ? "border-white" : "border-transparent hover:border-white/50"
               }`}
             >
-              <img
-                src={img}
-                alt={`Thumbnail ${idx + 1}`}
-                className="w-full h-full object-cover"
-              />
+              <Image src={img} alt={`Thumbnail ${idx + 1}`} fill className="object-cover" sizes="64px" />
             </button>
           ))}
         </div>

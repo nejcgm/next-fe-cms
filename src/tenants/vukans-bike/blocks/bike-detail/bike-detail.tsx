@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import type { BikeDetailProps } from "./types";
 import { formatCurrency } from "@shared/utils/format";
@@ -45,11 +46,14 @@ export function BikeDetail({ bike }: BikeDetailProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Images */}
           <div className="space-y-4">
-            <div className="aspect-square rounded-[var(--radius)] overflow-hidden bg-[var(--color-muted)] border border-[var(--color-border)]">
-              <img
+            <div className="relative aspect-square overflow-hidden rounded-[var(--radius)] border border-[var(--color-border)] bg-[var(--color-muted)]">
+              <Image
                 src={allImages[selectedImageIndex]}
                 alt={bike.name}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
               />
             </div>
             {allImages.length > 1 && (
@@ -57,17 +61,20 @@ export function BikeDetail({ bike }: BikeDetailProps) {
                 {allImages.map((img, i) => (
                   <button
                     key={i}
+                    type="button"
                     onClick={() => setSelectedImageIndex(i)}
-                    className={`aspect-square rounded-[var(--radius)] overflow-hidden bg-[var(--color-muted)] border-2 transition-all cursor-pointer ${
+                    className={`relative aspect-square cursor-pointer overflow-hidden rounded-[var(--radius)] border-2 bg-[var(--color-muted)] transition-all ${
                       i === selectedImageIndex
                         ? "border-[var(--color-primary)] ring-2 ring-[var(--color-primary)]/20"
                         : "border-[var(--color-border)] hover:border-[var(--color-primary)]/50"
                     }`}
                   >
-                    <img
+                    <Image
                       src={img}
                       alt={`${bike.name} - ${i + 1}`}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 25vw, 12vw"
                     />
                   </button>
                 ))}

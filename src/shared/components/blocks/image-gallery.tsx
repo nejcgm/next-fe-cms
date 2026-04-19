@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { cn } from "@shared/utils/cn";
 
@@ -37,15 +38,21 @@ export function ImageGallery({ heading, images, columns = 4, lightbox = false }:
             <div
               key={index}
               className={cn(
-                "overflow-hidden rounded-[var(--radius)] cursor-pointer group",
+                "group relative aspect-square cursor-pointer overflow-hidden rounded-[var(--radius)]",
                 columns === 4 && index === 0 ? "col-span-2 row-span-2" : ""
               )}
               onClick={() => lightbox && setSelectedImage(image)}
             >
-              <img
+              <Image
                 src={image.src}
                 alt={image.alt}
-                className="w-full h-full object-cover aspect-square group-hover:scale-105 transition-transform duration-500"
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes={
+                  columns === 4 && index === 0
+                    ? "(max-width: 768px) 100vw, (max-width: 1024px) 66vw, 50vw"
+                    : "(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                }
               />
             </div>
           ))}
@@ -58,10 +65,13 @@ export function ImageGallery({ heading, images, columns = 4, lightbox = false }:
           className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
           onClick={() => setSelectedImage(null)}
         >
-          <img
+          <Image
             src={selectedImage.src}
             alt={selectedImage.alt}
-            className="max-w-full max-h-full object-contain"
+            width={1600}
+            height={1200}
+            className="max-h-[90vh] max-w-full object-contain"
+            sizes="100vw"
           />
           <button
             className="absolute top-4 right-4 text-white text-2xl"

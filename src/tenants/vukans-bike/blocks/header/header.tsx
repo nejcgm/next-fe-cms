@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { cn } from "@shared/utils/cn";
@@ -26,12 +27,13 @@ export function Header({ tenantId, tenantName, navigation, logoUrl }: HeaderProp
           {/* Logo */}
           <a href="/" className="flex items-center min-w-0 shrink-0">
             {logoUrl ? (
-              <img
+              <Image
                 src={logoUrl}
                 alt={tenantName}
-                className="h-10 w-auto max-h-10 max-w-[min(200px,45vw)] object-contain object-left"
                 width={200}
                 height={40}
+                className="h-10 w-auto max-h-10 max-w-[min(200px,45vw)] object-contain object-left"
+                priority
               />
             ) : (
               <span className="font-heading text-xl font-bold text-[var(--color-primary)]">
