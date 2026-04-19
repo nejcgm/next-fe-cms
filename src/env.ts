@@ -9,7 +9,11 @@ const envSchema = z.object({
   NODE_ENV: z.enum(["development", "production", "test"]),
   STRAPI_URL: optionalUrl,
   STRAPI_API_TOKEN: z.string().optional(),
-  REVALIDATE_SECRET: z.string().min(16).default("change-me-in-production-16-chars"),
+  /** Empty env (common in CI) falls back to default so `next build` can load `/api/revalidate`. Set a real ≥16 char secret in production. */
+  REVALIDATE_SECRET: z.preprocess(
+    (v) => (typeof v === "string" && v.trim() === "" ? undefined : v),
+    z.string().min(16).default("change-me-in-production-16-chars")
+  ),
   RESORT_BOOKING_API_URL: optionalUrl,
   RESORT_BOOKING_API_KEY: z.string().optional(),
   LITEAPI_URL: optionalUrl,
