@@ -5,7 +5,7 @@
   "seo": {
     "title": "Trgovina — Vukan's Bike",
     "description": "Kolesa na prodajo: gorska, električna in cestna. Ogled, testna vožnja in nasvet po dogovoru. Kontakt: 070 815 379.",
-    "ogImage": "https://res.cloudinary.com/dru1crghm/image/upload/q_auto/f_auto/v1775402438/IMG_0035_fsvhgt.jpg"
+    "ogImage": "https://res.cloudinary.com/dru1crghm/image/upload/q_auto/f_auto/v1775402435/IMG_0028_gzpale.jpg"
   },
   "blocks": [
     {
@@ -14,7 +14,7 @@
       "props": {
         "headline": "Trgovina",
         "subheadline": "Vsa kolesa na prodajo na enem mestu — od trail MTB in E-MTB do cestnih koles. Za podrobnosti in ogled nas kontaktirajte.",
-        "backgroundImage": "https://res.cloudinary.com/dru1crghm/image/upload/q_auto/f_auto/v1775402438/IMG_0035_fsvhgt.jpg",
+        "backgroundImage": "https://res.cloudinary.com/dru1crghm/image/upload/q_auto/f_auto/v1775402435/IMG_0028_gzpale.jpg",
         "overlay": 0.5,
         "cta": {
           "label": "Kontakt",

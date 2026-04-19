@@ -5,7 +5,7 @@
   "seo": {
     "title": "Vodene ture — Vukan's Bike Shop",
     "description": "Organiziramo vodene ture po dogovoru za manjše skupine. Trase prilagodimo nivoju, tempu in ciljem ekipe.",
-    "ogImage": "https://res.cloudinary.com/dru1crghm/image/upload/q_auto/f_auto/v1775402438/IMG_0035_fsvhgt.jpg"
+    "ogImage": "https://res.cloudinary.com/dru1crghm/image/upload/q_auto/f_auto/v1776622215/1000025520_kspaqn.jpg"
   },
   "blocks": [
     {
@@ -14,7 +14,7 @@
       "props": {
         "headline": "Vodene ture",
         "subheadline": "Ture organiziramo po dogovoru. Tempo, dolžino in zahtevnost prilagodimo skupini.",
-        "backgroundImage": "https://res.cloudinary.com/dru1crghm/image/upload/q_auto/f_auto/v1775402438/IMG_0035_fsvhgt.jpg",
+        "backgroundImage": "https://res.cloudinary.com/dru1crghm/image/upload/q_auto/f_auto/v1776622215/1000025520_kspaqn.jpg",
         "overlay": 0.5,
         "cta": {
           "label": "Rezerviraj termin",
@@ -69,7 +69,7 @@
         "lightboxAltPrefix": "Galerija",
         "images": [
           {
-            "src": "https://res.cloudinary.com/dru1crghm/image/upload/q_auto/f_auto/v1775402438/IMG_0035_fsvhgt.jpg",
+            "src": "https://res.cloudinary.com/dru1crghm/image/upload/q_auto/f_auto/v1776622215/1000025520_kspaqn.jpg",
             "alt": "Vodene ture 1"
           },
           {
