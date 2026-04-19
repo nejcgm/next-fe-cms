@@ -4,6 +4,7 @@
     { "pathname": "/about" },
     { "pathname": "/brands" },
     { "pathname": "/contact" },
+    { "pathname": "/shop" },
     { "pathname": "/bike-school" },
     { "pathname": "/service" },
     { "pathname": "/guided-tours" },

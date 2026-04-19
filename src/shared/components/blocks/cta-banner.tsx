@@ -13,7 +13,7 @@ export function CtaBanner({ heading, subheading, cta, background = "primary" }: 
   const bgClass = {
     primary: "bg-[var(--color-primary)] text-white",
     muted: "bg-[var(--color-muted)] text-[var(--color-foreground)]",
-    dark: "bg-gray-900 text-white",
+    dark: "bg-[#0F0F11] text-white",
   }[background];
 
   return (

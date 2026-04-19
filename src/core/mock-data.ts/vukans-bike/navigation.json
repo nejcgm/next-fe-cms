@@ -2,6 +2,7 @@
   "header": [
     { "label": "Domov", "href": "/" },
     { "label": "Servis", "href": "/service" },
+    { "label": "Trgovina", "href": "/shop" },
     { "label": "Vodene ture", "href": "/guided-tours" },
     { "label": "Kolesarska šola", "href": "/bike-school" },
     { "label": "O nas", "href": "/about" },
@@ -11,10 +12,18 @@
   "footer": [
     { "label": "Domov", "href": "/" },
     { "label": "Servis", "href": "/service" },
+    { "label": "Trgovina", "href": "/shop" },
     { "label": "Vodene ture", "href": "/guided-tours" },
     { "label": "Kolesarska šola", "href": "/bike-school" },
     { "label": "O nas", "href": "/about" },
     { "label": "Partnerji", "href": "/brands" },
     { "label": "Kontakt", "href": "/contact" }
-  ]
+  ],
+  "footerCopy": {
+    "tagline": "Servis in trgovina gorskih koles v Apačah.",
+    "linksHeading": "Povezave",
+    "contactHeading": "Kontakt",
+    "contactPlaceholder": "Za vprašanja nas kontaktirajte.",
+    "copyrightReserved": "Vse pravice pridržane."
+  }
 }

@@ -62,6 +62,11 @@
       "props": {
         "heading": "Galerija vodenih tur",
         "subheading": "Zaenkrat uporabljamo obstoječe fotografije; kmalu dodamo namenske utrinke iz tur.",
+        "defaultImageAlt": "Galerija vodenih tur",
+        "showLessLabel": "Prikaži manj",
+        "showMorePrefix": "Prikaži več (",
+        "showMoreSuffix": ")",
+        "lightboxAltPrefix": "Galerija",
         "images": [
           {
             "src": "https://res.cloudinary.com/dru1crghm/image/upload/q_auto/f_auto/v1775402438/IMG_0035_fsvhgt.jpg",

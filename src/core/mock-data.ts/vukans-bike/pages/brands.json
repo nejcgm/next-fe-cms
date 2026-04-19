@@ -31,6 +31,8 @@
       "id": "partners-gallery-1",
       "type": "partners-gallery",
       "props": {
+        "eyebrowBadge": "Naši partnerji",
+        "defaultPartnerLinkLabel": "Obiščite spletno stran",
         "heading": "Partnerji, s katerimi sodelujemo",
         "subheading": "Znamke komponent in pnevmatik, festivali, gradnja stez, lokalna društva in tekmovalne ekipe — zanesljivi partnerji v kolesarstvu.",
         "partners": [

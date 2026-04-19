@@ -60,6 +60,7 @@
       "id": "about-values-1",
       "type": "about-values",
       "props": {
+        "eyebrowBadge": "Naše vrednote",
         "heading": "Zakaj mi",
         "subheading": "Naše vrednote so preproste: kakovost, iskrenost in vaše zaupanje.",
         "items": [

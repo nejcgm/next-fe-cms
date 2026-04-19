@@ -1,3 +1,7 @@
+import type { Breadcrumb, NavigationData } from "./navigation";
+
+export type { Breadcrumb, FooterCopy, NavItem, NavigationData } from "./navigation";
+
 export interface PageData {
   slug: string;
   slugPattern?: string;
@@ -32,19 +36,3 @@ export interface PageSeo {
   jsonLd?: Record<string, unknown>;
 }
 
-export interface NavigationData {
-  header: NavItem[];
-  footer: NavItem[];
-}
-
-export interface NavItem {
-  label: string;
-  href: string;
-  children?: NavItem[];
-  isExternal?: boolean;
-}
-
-export interface Breadcrumb {
-  label: string;
-  href: string;
-}

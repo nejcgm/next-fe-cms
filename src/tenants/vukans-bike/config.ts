@@ -17,7 +17,7 @@ const config: TenantConfig = {
   },
   domains: ["bikes.localhost", "vukansbikes.com", "www.vukansbikes.com"],
   defaultLocale: "sl",
-  locales: ["en", "sl"],
+  locales: ["sl", "de"],
   features: {
     blog: false,
     booking: false,

@@ -12,5 +12,12 @@
     { "label": "Careers", "href": "/careers" },
     { "label": "Privacy Policy", "href": "/privacy" },
     { "label": "Terms of Service", "href": "/terms" }
-  ]
+  ],
+  "footerCopy": {
+    "tagline": "Luxury mountain retreat in the heart of the Alps.",
+    "linksHeading": "Links",
+    "contactHeading": "Contact",
+    "contactPlaceholder": "Get in touch for reservations and inquiries.",
+    "copyrightReserved": "All rights reserved."
+  }
 }

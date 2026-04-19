@@ -1,4 +1,4 @@
-import type { NavItem } from "@core/types/navigation";
+import type { FooterCopy, NavItem } from "@core/types/navigation";
 import type { TenantContact } from "@core/types/tenant";
 import { isExternalHref } from "@shared/utils/url";
 
@@ -6,9 +6,10 @@ interface FooterProps {
   tenantName: string;
   navigation: NavItem[];
   contact?: TenantContact | null;
+  copy: FooterCopy;
 }
 
-export function Footer({ tenantName, navigation, contact }: FooterProps) {
+export function Footer({ tenantName, navigation, contact, copy }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -21,13 +22,13 @@ export function Footer({ tenantName, navigation, contact }: FooterProps) {
               {tenantName}
             </h3>
             <p className="text-[var(--color-muted-foreground)] text-sm">
-              Servis in trgovina gorskih koles v Apačah.
+              {copy.tagline}
             </p>
           </div>
 
           {/* Navigation */}
           <div>
-            <h4 className="font-semibold text-[var(--color-foreground)] mb-4">Povezave</h4>
+            <h4 className="font-semibold text-[var(--color-foreground)] mb-4">{copy.linksHeading}</h4>
             <ul className="space-y-2">
               {navigation.map((item) => {
                 const external = isExternalHref(item.href);
@@ -49,7 +50,7 @@ export function Footer({ tenantName, navigation, contact }: FooterProps) {
 
           {/* Contact */}
           <div>
-            <h4 className="font-semibold text-[var(--color-foreground)] mb-4">Kontakt</h4>
+            <h4 className="font-semibold text-[var(--color-foreground)] mb-4">{copy.contactHeading}</h4>
             {contact ? (
               <div className="space-y-2 text-sm text-[var(--color-muted-foreground)]">
                 <p>{contact.addressLine}</p>
@@ -66,7 +67,7 @@ export function Footer({ tenantName, navigation, contact }: FooterProps) {
               </div>
             ) : (
               <p className="text-[var(--color-muted-foreground)] text-sm">
-                Get in touch with us for any inquiries.
+                {copy.contactPlaceholder}
               </p>
             )}
           </div>
@@ -74,7 +75,7 @@ export function Footer({ tenantName, navigation, contact }: FooterProps) {
 
         <div className="border-t border-[var(--color-border)] mt-8 pt-8 text-center">
           <p className="text-[var(--color-muted-foreground)] text-sm">
-            &copy; {currentYear} {tenantName}. Vse pravice pridržane.
+            &copy; {currentYear} {tenantName}. {copy.copyrightReserved}
           </p>
         </div>
       </div>

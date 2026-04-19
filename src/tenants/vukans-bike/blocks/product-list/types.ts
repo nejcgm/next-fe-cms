@@ -15,8 +15,11 @@ export interface Product {
 export interface ProductListProps {
   heading?: string;
   subheading?: string;
+  outOfStockLabel: string;
   limit?: number;
   category?: string;
   layout?: "grid" | "list";
+  anchorId?: string;
+  locale?: string;
   products: Product[];
 }

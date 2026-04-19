@@ -1,10 +1,27 @@
 import Image from "next/image";
+import { prefixPathname } from "@core/i18n/locale-path";
+import tenantConfig from "@tenant/config";
 import type { ProductListProps } from "./types";
 import { formatCurrency } from "@shared/utils/format";
 
-export function ProductList({ heading, subheading, layout = "grid", products }: ProductListProps) {
+export function ProductList({
+  heading,
+  subheading,
+  layout = "grid",
+  products,
+  outOfStockLabel,
+  anchorId,
+  locale,
+}: ProductListProps) {
+  const activeLocale = locale ?? tenantConfig.defaultLocale;
+  const bikeHref = (slug: string) =>
+    prefixPathname(`/bikes/${slug}`, activeLocale, tenantConfig.defaultLocale);
+
   return (
-    <section className="py-16 px-4 bg-[var(--color-background)]">
+    <section
+      {...(anchorId ? { id: anchorId } : {})}
+      className="py-16 px-4 bg-[var(--color-background)] scroll-mt-24"
+    >
       <div className="max-w-6xl mx-auto">
         {heading && (
           <div className="text-center mb-12">
@@ -26,7 +43,7 @@ export function ProductList({ heading, subheading, layout = "grid", products }: 
           {products.map((product) => (
             <a
               key={product.id}
-              href={`/bikes/${product.slug}`}
+              href={bikeHref(product.slug)}
               className="group block rounded-[var(--radius)] overflow-hidden border border-[var(--color-border)] hover:shadow-lg transition-shadow bg-[var(--color-muted)]"
             >
               <div className="relative aspect-square overflow-hidden bg-[var(--color-muted)]">
@@ -59,7 +76,7 @@ export function ProductList({ heading, subheading, layout = "grid", products }: 
                   )}
                 </div>
                 {!product.inStock && (
-                  <span className="text-xs text-red-500 font-medium">Out of stock</span>
+                  <span className="text-xs text-red-500 font-medium">{outOfStockLabel}</span>
                 )}
               </div>
             </a>

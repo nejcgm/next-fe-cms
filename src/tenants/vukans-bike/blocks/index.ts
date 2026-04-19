@@ -1,5 +1,6 @@
 import { registerTenantBlocks } from "@core/blocks/registry";
 import { Hero } from "./hero/hero";
+import { loadProductsForProductListBlock } from "./product-list/load-products";
 import { ProductList } from "./product-list/product-list";
 import { ServicePricing } from "./service-pricing/service-pricing";
 import { ServiceProcess } from "./service-process/service-process";
@@ -63,14 +64,7 @@ registerTenantBlocks("vukans-bike", {
 
   "product-list": {
     component: ProductList,
-    dataContract: async (props, ctx) => {
-      const { getAdapter } = await import("../../../core/data/fetcher");
-      const products = await getAdapter(ctx.tenant).getCollection(ctx.tenant, "products", {
-        limit: (props.limit as number) ?? 8,
-        locale: ctx.locale,
-      });
-      return { products };
-    },
+    dataContract: (props, ctx) => loadProductsForProductListBlock(ctx.tenant, ctx.locale, props),
   },
 
   "service-pricing": {

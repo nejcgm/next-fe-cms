@@ -88,7 +88,7 @@ function ValueCard({ item, index }: { item: AboutValueItem; index: number }) {
   );
 }
 
-export function AboutValues({ heading, subheading, items }: AboutValuesProps) {
+export function AboutValues({ eyebrowBadge, heading, subheading, items }: AboutValuesProps) {
   return (
     <section className="py-20 md:py-28 px-4 bg-neutral-950">
       <div className="max-w-6xl mx-auto">
@@ -97,7 +97,7 @@ export function AboutValues({ heading, subheading, items }: AboutValuesProps) {
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
             </svg>
-            Naše vrednote
+            {eyebrowBadge}
           </div>
           <h2 className="font-heading text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
             {heading}

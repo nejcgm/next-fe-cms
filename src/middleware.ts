@@ -2,18 +2,27 @@ import { NextRequest, NextResponse } from "next/server";
 import tenantConfig from "@tenant/config";
 
 export function middleware(request: NextRequest) {
+  const visiblePathname = request.nextUrl.pathname;
   const { pathname } = request.nextUrl;
   const tenantPrefix = `/${tenantConfig.id}`;
 
-  // Already under /[tenantId]/... — do not rewrite again.
   if (pathname === tenantPrefix || pathname.startsWith(`${tenantPrefix}/`)) {
-    return NextResponse.next();
+    const visible =
+      pathname === tenantPrefix ? "/" : pathname.slice(tenantPrefix.length) || "/";
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set("x-pathname", visible);
+    return NextResponse.next({ request: { headers: requestHeaders } });
   }
 
   const url = request.nextUrl.clone();
-  // e.g. / → /vukans-bike/, /about → /vukans-bike/about
   url.pathname = `${tenantPrefix}${pathname}`;
-  return NextResponse.rewrite(url);
+
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-pathname", visiblePathname);
+
+  return NextResponse.rewrite(url, {
+    request: { headers: requestHeaders },
+  });
 }
 
 export const config = {

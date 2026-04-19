@@ -5,7 +5,7 @@ import { useState } from "react";
 import type { BikeDetailProps } from "./types";
 import { formatCurrency } from "@shared/utils/format";
 
-export function BikeDetail({ bike }: BikeDetailProps) {
+export function BikeDetail({ bike, labels }: BikeDetailProps) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   if (!bike) {
@@ -13,16 +13,16 @@ export function BikeDetail({ bike }: BikeDetailProps) {
       <section className="py-16 px-4 bg-[var(--color-background)]">
         <div className="max-w-6xl mx-auto text-center">
           <h1 className="font-heading text-2xl font-bold text-[var(--color-foreground)]">
-            Kolo ni najdeno
+            {labels.notFoundTitle}
           </h1>
           <p className="text-[var(--color-muted-foreground)] mt-2">
-            Kolo, ki ste ga iskali, ni na voljo.
+            {labels.notFoundBody}
           </p>
           <a
-            href="/"
+            href={labels.notFoundCtaHref}
             className="inline-block mt-6 px-6 py-3 bg-[var(--color-primary)] text-white rounded-[var(--radius)] hover:opacity-90 transition-opacity"
           >
-            Nazaj na začetno stran
+            {labels.notFoundCtaLabel}
           </a>
         </div>
       </section>
@@ -36,9 +36,13 @@ export function BikeDetail({ bike }: BikeDetailProps) {
       <div className="max-w-6xl mx-auto">
         {/* Breadcrumb */}
         <nav className="mb-6 text-sm text-[var(--color-muted-foreground)]">
-          <a href="/" className="hover:text-[var(--color-primary)]">Domov</a>
+          <a href={labels.breadcrumbHomeHref} className="hover:text-[var(--color-primary)]">
+            {labels.breadcrumbHome}
+          </a>
           <span className="mx-2">/</span>
-          <a href="/#kolesa" className="hover:text-[var(--color-primary)]">Kolesa na prodaj</a>
+          <a href={labels.breadcrumbBikesHref} className="hover:text-[var(--color-primary)]">
+            {labels.breadcrumbBikes}
+          </a>
           <span className="mx-2">/</span>
           <span className="text-[var(--color-foreground)]">{bike.name}</span>
         </nav>
@@ -108,7 +112,7 @@ export function BikeDetail({ bike }: BikeDetailProps) {
               )}
               {!bike.inStock && (
                 <span className="ml-auto text-sm font-semibold text-red-500 px-3 py-1 bg-red-500/10 rounded-full">
-                  Ni na zalogi
+                  {labels.outOfStock}
                 </span>
               )}
             </div>
@@ -116,7 +120,7 @@ export function BikeDetail({ bike }: BikeDetailProps) {
             {/* Description */}
             <div>
               <h2 className="font-heading text-lg font-semibold text-[var(--color-foreground)] mb-2">
-                Opis
+                {labels.descriptionHeading}
               </h2>
               <p className="text-[var(--color-muted-foreground)] leading-relaxed">
                 {bike.description}
@@ -127,7 +131,7 @@ export function BikeDetail({ bike }: BikeDetailProps) {
             {bike.specs && Object.keys(bike.specs).length > 0 && (
               <div>
                 <h2 className="font-heading text-lg font-semibold text-[var(--color-foreground)] mb-3">
-                  Specifikacije
+                  {labels.specsHeading}
                 </h2>
                 <div className="grid grid-cols-2 gap-3">
                   {Object.entries(bike.specs).map(([key, value]) => (
@@ -164,26 +168,26 @@ export function BikeDetail({ bike }: BikeDetailProps) {
             {/* Contact CTA */}
             <div className="pt-4">
               <p className="text-[var(--color-muted-foreground)] text-sm mb-4">
-                Za ogled, testno vožnjo ali nakup nas kontaktirajte.
+                {labels.contactTeaser}
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <a
-                  href="tel:+38670815379"
+                  href={labels.contactPhoneHref}
                   className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-[var(--color-primary)] text-white font-semibold rounded-[var(--radius)] hover:opacity-90 transition-opacity"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
-                  070 815 379
+                  {labels.contactPhoneLabel}
                 </a>
                 <a
-                  href="/contact"
+                  href={labels.contactCtaHref}
                   className="inline-flex items-center justify-center gap-2 px-6 py-4 border-2 border-[var(--color-primary)] text-[var(--color-primary)] font-semibold rounded-[var(--radius)] hover:bg-[var(--color-primary)] hover:text-white transition-colors"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
-                  Kontakt
+                  {labels.contactCtaLabel}
                 </a>
               </div>
             </div>

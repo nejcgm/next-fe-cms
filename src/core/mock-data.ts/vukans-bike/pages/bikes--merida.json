@@ -12,6 +12,24 @@
       "id": "bike-detail-1",
       "type": "bike-detail",
       "props": {
+        "labels": {
+          "notFoundTitle": "Kolo ni najdeno",
+          "notFoundBody": "Kolo, ki ste ga iskali, ni na voljo.",
+          "notFoundCtaLabel": "Nazaj na začetno stran",
+          "notFoundCtaHref": "/",
+          "breadcrumbHome": "Domov",
+          "breadcrumbHomeHref": "/",
+          "breadcrumbBikes": "Kolesa na prodaj",
+          "breadcrumbBikesHref": "/#kolesa",
+          "outOfStock": "Ni na zalogi",
+          "descriptionHeading": "Opis",
+          "specsHeading": "Specifikacije",
+          "contactTeaser": "Za ogled, testno vožnjo ali nakup nas kontaktirajte.",
+          "contactPhoneLabel": "070 815 379",
+          "contactPhoneHref": "tel:+38670815379",
+          "contactCtaLabel": "Kontakt",
+          "contactCtaHref": "/contact"
+        },
         "bike": {
           "id": "prod-3",
           "name": "Merida Road Ride 903-27",

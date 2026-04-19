@@ -1,12 +1,9 @@
 import type { CmsAdapter, CollectionParams, SitemapEntry } from "../contracts";
 import type { PageData, NavigationData } from "@core/types/page";
 import { logger } from "@shared/lib/logger";
+import tenantConfig from "@tenant/config";
 
-// Static import - both tenants have navigation.json
-import nav from "@mock-data/navigation.json";
 import sitemapFile from "@mock-data/sitemap.json";
-
-const navigation = nav as NavigationData;
 
 interface SitemapJsonEntry {
   pathname: string;
@@ -57,55 +54,81 @@ async function findPageByPattern(slug: string): Promise<PageData | null> {
 export class MockAdapter implements CmsAdapter {
   async getPage(_tenant: string, slug: string, locale: string): Promise<PageData | null> {
     const normalized = slug === "/" ? "home" : slug.replace(/^\//, "").replace(/\//g, "--");
+    const defaultLocale = tenantConfig.defaultLocale;
 
-    logger.debug(`MockAdapter: Loading page for ${normalized}`);
+    logger.debug(`MockAdapter: Loading page for ${normalized} (locale ${locale})`);
 
-    try {
-      const mod = await import(
-        /* webpackInclude: /\.json$/ */
-        /* webpackChunkName: "mock-page-[request]" */
-        `@mock-data/pages/${normalized}.json`
-      );
-      const page = mod.default as PageData;
-
-      const cloned = { ...page };
-      if (locale !== cloned.locale) {
-        cloned.locale = locale;
-      }
-      return cloned;
-    } catch {
-      const page = await findPageByPattern(slug);
-      if (!page) {
-        logger.warn(`MockAdapter: Page not found: ${normalized}`);
+    const loadJson = async (fileBase: string): Promise<PageData | null> => {
+      try {
+        const mod = await import(
+          /* webpackInclude: /\.json$/ */
+          /* webpackChunkName: "mock-page-[request]" */
+          `@mock-data/pages/${fileBase}.json`
+        );
+        return (mod.default ?? mod) as PageData;
+      } catch {
         return null;
       }
-      const cloned = { ...page };
-      if (locale !== cloned.locale) {
-        cloned.locale = locale;
-      }
-      return cloned;
+    };
+
+    // Non-default locale: try `de--about.json` first, then fall back to shared `about.json`.
+    let page: PageData | null = null;
+    if (locale !== defaultLocale) {
+      page = await loadJson(`${locale}--${normalized}`);
     }
+    if (!page) {
+      page = await loadJson(normalized);
+    }
+    if (!page) {
+      page = await findPageByPattern(slug);
+    }
+    if (!page) {
+      logger.warn(`MockAdapter: Page not found: ${normalized}`);
+      return null;
+    }
+
+    const cloned = { ...page };
+    if (locale !== cloned.locale) {
+      cloned.locale = locale;
+    }
+    return cloned;
   }
 
   async getCollection<T>(_tenant: string, collection: string, params?: CollectionParams): Promise<T[]> {
-    logger.debug(`MockAdapter: Loading collection ${collection}`);
+    const defaultLocale = tenantConfig.defaultLocale;
+    const locale = params?.locale ?? defaultLocale;
 
-    try {
-      const mod = await import(
-        /* webpackInclude: /\.json$/ */
-        /* webpackChunkName: "mock-collection-[request]" */
-        `@mock-data/collections/${collection}.json`
-      );
-      let data = mod.default as T[];
+    logger.debug(`MockAdapter: Loading collection ${collection} (locale ${locale})`);
 
-      if (params?.limit) {
-        data = data.slice(0, params.limit);
+    const loadJson = async (fileBase: string): Promise<T[] | null> => {
+      try {
+        const mod = await import(
+          /* webpackInclude: /\.json$/ */
+          /* webpackChunkName: "mock-collection-[request]" */
+          `@mock-data/collections/${fileBase}.json`
+        );
+        return mod.default as T[];
+      } catch {
+        return null;
       }
-      return data;
-    } catch {
+    };
+
+    let data: T[] | null = null;
+    if (locale !== defaultLocale) {
+      data = await loadJson(`${locale}--${collection}`);
+    }
+    if (!data) {
+      data = await loadJson(collection);
+    }
+    if (!data) {
       logger.warn(`MockAdapter: Collection not found: ${collection}`);
       return [];
     }
+
+    if (typeof params?.limit === "number" && Number.isFinite(params.limit) && params.limit > 0) {
+      data = data.slice(0, params.limit);
+    }
+    return data;
   }
 
   async getEntry<T>(_tenant: string, collection: string, id: string): Promise<T | null> {
@@ -113,10 +136,34 @@ export class MockAdapter implements CmsAdapter {
     return items.find((item) => item.id === id) ?? null;
   }
 
-  async getNavigation(tenant: string, locale: string): Promise<NavigationData | null> {
-    void tenant;
-    void locale;
-    return navigation;
+  async getNavigation(_tenant: string, locale: string): Promise<NavigationData | null> {
+    const defaultLocale = tenantConfig.defaultLocale;
+
+    const loadJson = async (fileBase: string): Promise<NavigationData | null> => {
+      try {
+        const mod = await import(
+          /* webpackInclude: /\.json$/ */
+          /* webpackChunkName: "mock-navigation-[request]" */
+          `@mock-data/${fileBase}.json`
+        );
+        return (mod.default ?? mod) as NavigationData;
+      } catch {
+        return null;
+      }
+    };
+
+    let data: NavigationData | null = null;
+    if (locale !== defaultLocale) {
+      data = await loadJson(`${locale}--navigation`);
+    }
+    if (!data) {
+      data = await loadJson("navigation");
+    }
+    if (!data) {
+      logger.warn("MockAdapter: navigation.json not found");
+      return null;
+    }
+    return data;
   }
 
   async listSitemapEntries(tenant: string, locale: string): Promise<SitemapEntry[]> {

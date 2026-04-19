@@ -1,0 +1,14 @@
+[
+  {
+    "id": "prod-3",
+    "name": "Merida Road Ride 903-27",
+    "slug": "merida",
+    "description": "Klassisches Rennrad Merida Road Ride 903-27: Aluminiumrahmen Road Lite Ride, Gabel Aluminium / Carbon, 27 Gänge (3×9) mit Shimano Tiagra.",
+    "shortDescription": "Rennrad, Shimano Tiagra 3×9, 27 Gänge",
+    "price": 350,
+    "image": "https://res.cloudinary.com/dru1crghm/image/upload/f_jpg,q_auto/v1775402581/IMG_4484_p1jqkq.heic",
+    "category": "Rennräder",
+    "inStock": true,
+    "tags": ["Rennrad", "Merida", "Shimano Tiagra", "27 Gänge", "Road Ride"]
+  }
+]

@@ -1,4 +1,7 @@
+import type { BikeDetailLabels } from "./labels";
+
 export interface BikeDetailProps {
+  labels: BikeDetailLabels;
   bike?: {
     id: string;
     name: string;

@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import tenantConfig from "@tenant/config";
 import { Header } from "@tenant/blocks/header/header";
 import { getAdapter } from "@core/data/fetcher";
+import { localizeHref, parseLocaleFromSegments } from "@core/i18n/locale-path";
 import { ThemeProvider } from "@core/theme/provider";
 import { Footer } from "@shared/components/layout/footer";
+import type { NavItem } from "@core/types/navigation";
+import { isExternalHref } from "@shared/utils/url";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -25,8 +29,25 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function TenantLayout({ children, params }: LayoutProps) {
   const { domain } = await params;
 
+  const headerList = await headers();
+  const browserPath = headerList.get("x-pathname") ?? "/";
+  const { locale: activeLocale } = parseLocaleFromSegments(
+    browserPath.split("/").filter(Boolean),
+    tenantConfig.locales,
+    tenantConfig.defaultLocale
+  );
+
   const adapter = getAdapter(domain);
-  const nav = await adapter.getNavigation(domain, tenantConfig.defaultLocale);
+  const nav = await adapter.getNavigation(domain, activeLocale);
+
+  const localizeNav = (items: NavItem[]): NavItem[] =>
+    items.map((item) => ({
+      ...item,
+      href: localizeHref(item.href, activeLocale, tenantConfig.defaultLocale, tenantConfig.locales, isExternalHref),
+    }));
+
+  const headerNav = nav?.header ? localizeNav(nav.header) : [];
+  const footerNav = nav?.footer ? localizeNav(nav.footer) : [];
 
   return (
     <ThemeProvider tokens={tenantConfig.theme}>
@@ -35,13 +56,22 @@ export default async function TenantLayout({ children, params }: LayoutProps) {
           <Header
             tenantId={tenantConfig.id}
             tenantName={tenantConfig.name}
-            navigation={nav.header}
+            navigation={headerNav}
             logoUrl={tenantConfig.logoUrl}
+            locales={tenantConfig.locales}
+            defaultLocale={tenantConfig.defaultLocale}
           />
         )}
-        <main className="flex-1" suppressHydrationWarning>{children}</main>
-        {nav?.footer && (
-          <Footer tenantName={tenantConfig.name} navigation={nav.footer} contact={tenantConfig.contact} />
+        <main className="flex min-h-0 flex-1 flex-col" suppressHydrationWarning>
+          {children}
+        </main>
+        {nav?.footer && nav.footerCopy && (
+          <Footer
+            tenantName={tenantConfig.name}
+            navigation={footerNav}
+            contact={tenantConfig.contact}
+            copy={nav.footerCopy}
+          />
         )}
       </div>
     </ThemeProvider>

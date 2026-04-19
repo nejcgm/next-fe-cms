@@ -1,6 +1,15 @@
 import type { ContactProps, ContactAddress } from "./types";
+import type { ContactLabels } from "./labels";
 
-function AddressBlock({ address, directionsLink }: { address: ContactAddress; directionsLink: string }) {
+function AddressBlock({
+  address,
+  directionsLink,
+  labels,
+}: {
+  address: ContactAddress;
+  directionsLink: string;
+  labels: ContactLabels;
+}) {
   const line1 = [address.street].filter(Boolean).join(", ");
   const line2 = [address.postalCode, address.city].filter(Boolean).join(" ");
   const line3 = address.country;
@@ -14,7 +23,7 @@ function AddressBlock({ address, directionsLink }: { address: ContactAddress; di
         </svg>
       </div>
       <div>
-        <h3 className="font-semibold text-[var(--color-foreground)] mb-1">Naslov</h3>
+        <h3 className="font-semibold text-[var(--color-foreground)] mb-1">{labels.addressHeading}</h3>
         <p className="text-[var(--color-muted-foreground)]">
           {line1 && <span className="block">{line1}</span>}
           {line2 && <span className="block">{line2}</span>}
@@ -26,7 +35,7 @@ function AddressBlock({ address, directionsLink }: { address: ContactAddress; di
           rel="noopener noreferrer"
           className="text-[var(--color-primary)] hover:underline text-sm mt-2 inline-flex items-center gap-1"
         >
-          Odpri v Google Maps →
+          {labels.directionsLinkText}
         </a>
       </div>
     </div>
@@ -34,6 +43,7 @@ function AddressBlock({ address, directionsLink }: { address: ContactAddress; di
 }
 
 export function Contact({
+  labels,
   heading,
   subheading,
   address,
@@ -63,7 +73,7 @@ export function Contact({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Contact info */}
           <div className="space-y-6">
-            <AddressBlock address={address} directionsLink={directionsLink} />
+            <AddressBlock address={address} directionsLink={directionsLink} labels={labels} />
 
             <div className="flex items-start gap-4">
               <div className="w-10 h-10 rounded-full bg-[var(--color-primary)]/10 flex items-center justify-center shrink-0">
@@ -72,7 +82,7 @@ export function Contact({
                 </svg>
               </div>
               <div>
-                <h3 className="font-semibold text-[var(--color-foreground)] mb-1">Telefon</h3>
+                <h3 className="font-semibold text-[var(--color-foreground)] mb-1">{labels.phoneHeading}</h3>
                 <a href={`tel:${tel}`} className="text-[var(--color-muted-foreground)] hover:text-[var(--color-primary)]">
                   {phone}
                 </a>
@@ -86,7 +96,7 @@ export function Contact({
                 </svg>
               </div>
               <div>
-                <h3 className="font-semibold text-[var(--color-foreground)] mb-1">E-pošta</h3>
+                <h3 className="font-semibold text-[var(--color-foreground)] mb-1">{labels.emailHeading}</h3>
                 <a href={`mailto:${email}`} className="text-[var(--color-muted-foreground)] hover:text-[var(--color-primary)]">
                   {email}
                 </a>
@@ -110,7 +120,7 @@ export function Contact({
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Lokacija na zemljevidu — Google Maps"
+                  title={labels.mapIframeTitle}
                 />
               ) : (
                 <a
@@ -123,7 +133,7 @@ export function Contact({
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  <span className="text-[var(--color-foreground)] font-medium">Odpri v Google Maps</span>
+                  <span className="text-[var(--color-foreground)] font-medium">{labels.mapFallbackTitle}</span>
                   <span className="text-sm text-[var(--color-muted-foreground)]">
                     {address.street}, {address.postalCode} {address.city}
                   </span>
@@ -137,7 +147,7 @@ export function Contact({
                 rel="noopener noreferrer"
                 className="text-center text-sm text-[var(--color-primary)] hover:underline"
               >
-                Odpri v Google Maps (cel zaslon) →
+                {labels.mapFullscreenLink}
               </a>
             )}
           </div>

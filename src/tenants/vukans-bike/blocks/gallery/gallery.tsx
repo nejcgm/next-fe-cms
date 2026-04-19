@@ -7,7 +7,16 @@ import type { GalleryProps } from "./types";
 
 const INITIAL_VISIBLE_COUNT = 10;
 
-export function Gallery({ heading, subheading, images }: GalleryProps) {
+export function Gallery({
+  heading,
+  subheading,
+  images,
+  defaultImageAlt,
+  showLessLabel,
+  showMorePrefix,
+  showMoreSuffix,
+  lightboxAltPrefix,
+}: GalleryProps) {
   const [expanded, setExpanded] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -53,7 +62,7 @@ export function Gallery({ heading, subheading, images }: GalleryProps) {
             >
               <Image
                 src={image.src}
-                alt={image.alt ?? "Galerija"}
+                alt={image.alt ?? defaultImageAlt}
                 fill
                 sizes="(max-width: 768px) 50vw, 25vw"
                 className="object-cover"
@@ -69,7 +78,9 @@ export function Gallery({ heading, subheading, images }: GalleryProps) {
               onClick={() => setExpanded((prev) => !prev)}
               className="inline-flex items-center gap-2 rounded-[var(--radius)] border border-[var(--color-border)] px-4 py-2.5 text-sm font-semibold text-[var(--color-foreground)] hover:bg-[var(--color-muted)] transition-colors"
             >
-              {expanded ? "Prikaži manj" : `Prikaži več (${totalImages - INITIAL_VISIBLE_COUNT})`}
+              {expanded
+                ? showLessLabel
+                : `${showMorePrefix}${totalImages - INITIAL_VISIBLE_COUNT}${showMoreSuffix}`}
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 {expanded ? (
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
@@ -87,7 +98,7 @@ export function Gallery({ heading, subheading, images }: GalleryProps) {
         initialIndex={lightboxIndex}
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
-        altPrefix="Galerija"
+        altPrefix={lightboxAltPrefix}
       />
     </section>
   );

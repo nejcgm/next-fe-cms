@@ -6,6 +6,7 @@ export interface AboutValueItem {
 }
 
 export interface AboutValuesProps {
+  eyebrowBadge: string;
   heading: string;
   subheading?: string;
   items: AboutValueItem[];
