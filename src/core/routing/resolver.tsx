@@ -1,7 +1,6 @@
 import type { ComponentType } from "react";
 
 export async function resolveTemplate(
-  _tenantId: string,
   templateName: string
 ): Promise<ComponentType<any>> {
   try {

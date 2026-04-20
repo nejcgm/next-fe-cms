@@ -51,7 +51,7 @@ export default async function TenantPage({ params, searchParams }: PageProps) {
     notFound();
   }
 
-  const Template = await resolveTemplate(tenantConfig.id, page.template);
+  const Template = await resolveTemplate(page.template);
 
   const blocksWithQuery = page.blocks.map((block) => ({
     ...block,
