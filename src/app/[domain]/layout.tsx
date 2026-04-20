@@ -8,6 +8,7 @@ import { ThemeProvider } from "@core/theme/provider";
 import { Footer } from "@shared/components/layout/footer";
 import type { NavItem } from "@core/types/navigation";
 import { isExternalHref } from "@shared/utils/url";
+import { TenantAnalytics } from "./tenant-analytics";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -74,6 +75,7 @@ export default async function TenantLayout({ children, params }: LayoutProps) {
           />
         )}
       </div>
+      <TenantAnalytics tenant={domain} />
     </ThemeProvider>
   );
 }
